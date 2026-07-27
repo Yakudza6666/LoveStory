@@ -36,6 +36,10 @@ const observer = new IntersectionObserver((entries)=>{
 
 sections.forEach(section=>observer.observe(section));
 
+const heroSection = document.querySelector('.hero');
+if(heroSection){
+    heroSection.classList.add('show');
+}
 
 // ---------- Love Timer ----------
 
@@ -147,11 +151,11 @@ const heroContent = document.querySelector(".hero-content");
 
 window.addEventListener("mousemove", (event) => {
 
-    if(!heroContent) return;
+    if(!heroContent || window.innerWidth <= 520) return;
 
-    const x = (event.clientX / window.innerWidth - 0.5) * 8;
+    const x = (event.clientX / window.innerWidth - 0.5) * 12;
 
-    const y = (event.clientY / window.innerHeight - 0.5) * 8;
+    const y = (event.clientY / window.innerHeight - 0.5) * 12;
 
     heroContent.style.transform = `translate(${x}px, ${y}px)`;
 
@@ -165,6 +169,16 @@ window.addEventListener("mouseleave", () => {
 
     }
 
+});
+
+window.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' ') {
+        const active = document.activeElement;
+        if(active === document.getElementById('start')) {
+            e.preventDefault();
+            startButton.click();
+        }
+    }
 });
 
 // ---------- Floating gallery cards ----------
