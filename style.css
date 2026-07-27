@@ -1074,51 +1074,78 @@ font-size:46px;
 @media(max-width:520px){
 
 .hero{
-    padding:16px 12px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:18px 10px 32px;
+    min-height:auto;
+}
+
+.hero::before,
+.hero::after{
+    display:none;
+}
+
+.hero-photos{
+    display:block;
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:2;
 }
 
 .hero-content{
-    width:min(100%, 460px);
+    width:min(100%, 88vw);
+    max-width:420px;
     margin:0 auto;
-    padding:24px 20px;
-    background:rgba(255,255,255,.08);
-    border-radius:28px;
-    box-shadow:0 18px 60px rgba(0,0,0,.22);
+    padding:28px 20px;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:36px;
+    backdrop-filter:blur(22px);
+    box-shadow:0 24px 90px rgba(0,0,0,.32);
+    position:relative;
+    z-index:5;
 }
 
 .hero h2{
     font-size:44px;
-    line-height:1.08;
+    line-height:1.05;
 }
 
 .hero p{
     font-size:16px;
-    line-height:1.72;
+    line-height:1.74;
+    margin-bottom:28px;
 }
 
 button{
     width:100%;
     padding:16px 18px;
     font-size:16px;
+    border-radius:999px;
 }
 
-.hero::after,
-.hero-photos{
-    display:none;
+.hero-badge{
+    margin-top:18px;
 }
 
 .heart-photo{
     position:relative;
     left:auto;
     top:auto;
-    margin:0 auto 22px;
+    margin:0 auto 28px;
     width:130px;
     height:130px;
     animation:none;
+    z-index:4;
 }
 
 .section{
-    padding:54px 16px;
+    padding:56px 14px;
 }
 
 .section h1{
@@ -1135,19 +1162,20 @@ button{
 }
 
 .gallery{
-    gap:16px;
-    padding:14px 10px;
+    gap:18px;
+    padding:12px 8px;
     width:100%;
     margin:0 auto;
 }
 
 .photo-card{
     width:100%;
-    max-width:100%;
     padding:10px;
     animation:none;
     transform:none;
     grid-column:auto;
+    background:rgba(255,255,255,.04);
+    border-radius:28px;
 }
 
 .photo-card.featured,
@@ -1160,19 +1188,20 @@ button{
 .photo-card.tall .photo{
     width:100%;
     height:auto;
-    aspect-ratio:auto;
+    aspect-ratio:4/5;
     object-fit:cover;
     display:block;
+    border-radius:24px;
 }
 
 .photo-card:first-child .photo,
 .photo-card:nth-child(2) .photo{
-    min-height:320px;
+    min-height:360px;
 }
 
 .photo-card:nth-child(3) .photo,
 .photo-card:nth-child(4) .photo{
-    min-height:300px;
+    min-height:320px;
 }
 
 .lovey-note{
