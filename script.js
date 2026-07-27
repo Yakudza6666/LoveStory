@@ -286,8 +286,13 @@ function initHeroPhotos(){
         }
 
         // gentle float animation with CSS keyframes via inline style
-        const dur = 8 + Math.random() * 8;
-        img.style.animation = `heroFloat ${dur}s ease-in-out ${Math.random()*3}s infinite`;
+        const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if(!prefersReduced && window.innerWidth > 520){
+            const dur = 6 + Math.random() * 6; // shorter, subtler
+            img.style.animation = `heroFloat ${dur}s ease-in-out ${Math.random()*2}s infinite`;
+        } else {
+            img.style.animation = 'none';
+        }
 
         // allow dragging on pointer devices (simple)
         img.addEventListener('pointerdown', (e)=>{
@@ -328,7 +333,7 @@ function initHeroPhotos(){
 
 // float animation keyframes (insert via stylesheet)
 const style = document.createElement('style');
-style.innerHTML = `@keyframes heroFloat{ 0%{ transform: translateY(0) rotate(var(--r,0deg)) } 50%{ transform: translateY(-10px) rotate(calc(var(--r,0deg) + 2deg)) } 100%{ transform: translateY(0) rotate(var(--r,0deg)) } }`;
+style.innerHTML = `@keyframes heroFloat{ 0%{ transform: translateY(0) rotate(var(--r,0deg)) } 50%{ transform: translateY(-6px) rotate(calc(var(--r,0deg) + 1.5deg)) } 100%{ transform: translateY(0) rotate(var(--r,0deg)) } }`;
 document.head.appendChild(style);
 
 // init on load
