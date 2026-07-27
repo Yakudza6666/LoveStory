@@ -340,153 +340,15 @@ const closeViewer = document.getElementById("close");
 
 photos.forEach(photo=>{
 
-photo.onclick=()=>{
+    photo.onclick=()=>{
 
-    const card = photo.closest('.photo-card');
-    if(card && card.classList.contains('locked')){
-        openGameModal(card, photo);
-        return;
-    }
+        viewer.style.display="flex";
 
-    viewer.style.display="flex";
+        viewerImg.src=photo.src;
 
-    viewerImg.src=photo.src;
-
-};
+    };
 
 });
-
-// ---------------- Game modal logic ----------------
-const gameModal = document.getElementById('gameModal');
-const gameClose = document.getElementById('gameClose');
-const choiceTap = document.getElementById('choiceTap');
-const choiceMath = document.getElementById('choiceMath');
-const tapGame = document.getElementById('tapGame');
-const mathGame = document.getElementById('mathGame');
-const tapButton = document.getElementById('tapButton');
-const tapProgress = document.getElementById('tapProgress');
-const tapTargetCountEl = document.getElementById('tapTargetCount');
-const tapTimeLimitEl = document.getElementById('tapTimeLimit');
-const mathQuestion = document.getElementById('mathQuestion');
-const mathAnswer = document.getElementById('mathAnswer');
-const mathSubmit = document.getElementById('mathSubmit');
-const gameMessage = document.getElementById('gameMessage');
-
-let currentLockedCard = null;
-
-function openGameModal(card, photo){
-    currentLockedCard = card;
-    gameModal.classList.remove('hidden');
-    gameModal.setAttribute('aria-hidden','false');
-    // reset screens
-    tapGame.classList.add('hidden');
-    mathGame.classList.add('hidden');
-    gameMessage.textContent = '';
-}
-
-gameClose.addEventListener('click', closeGameModal);
-gameModal.addEventListener('click', (e)=>{ if(e.target===gameModal) closeGameModal(); });
-
-function closeGameModal(){
-    gameModal.classList.add('hidden');
-    gameModal.setAttribute('aria-hidden','true');
-    stopTapGame();
-}
-
-// TAP GAME
-let tapTarget = 25;
-let tapTimeLimit = 6; // seconds
-let tapCount = 0;
-let tapTimer = null;
-
-choiceTap.addEventListener('click', ()=> startTapGame());
-
-function startTapGame(){
-    tapTarget = 20 + Math.floor(Math.random()*8); // 20-27
-    tapTimeLimit = 5 + Math.floor(Math.random()*4); //5-8s
-    tapTargetCountEl.textContent = tapTarget;
-    tapTimeLimitEl.textContent = tapTimeLimit;
-    tapCount = 0;
-    tapProgress.style.width = '0%';
-    tapGame.classList.remove('hidden');
-    mathGame.classList.add('hidden');
-    gameMessage.textContent = '';
-
-    if(tapTimer) clearTimeout(tapTimer);
-    tapTimer = setTimeout(()=>{
-        finishTapGame(false);
-    }, tapTimeLimit * 1000);
-}
-
-function stopTapGame(){
-    if(tapTimer) { clearTimeout(tapTimer); tapTimer = null; }
-}
-
-tapButton.addEventListener('click', ()=>{
-    if(!tapTimer) return;
-    tapCount++;
-    const p = Math.min(1, tapCount / tapTarget);
-    tapProgress.style.width = (p*100) + '%';
-    if(tapCount >= tapTarget){
-        finishTapGame(true);
-    }
-});
-
-function finishTapGame(success){
-    stopTapGame();
-    if(success){
-        gameMessage.textContent = 'Отлично! Фото разблокировано.';
-        unlockCurrentCard();
-        setTimeout(closeGameModal,900);
-    } else {
-        gameMessage.textContent = 'Не успели — попробуйте ещё раз.';
-    }
-}
-
-// MATH GAME
-choiceMath.addEventListener('click', ()=> startMathGame());
-
-let mathAnswerCorrect = null;
-function startMathGame(){
-    tapGame.classList.add('hidden');
-    mathGame.classList.remove('hidden');
-    gameMessage.textContent = '';
-    // small easy example
-    const a = 1 + Math.floor(Math.random()*8);
-    const b = 1 + Math.floor(Math.random()*8);
-    mathAnswerCorrect = a + b;
-    mathQuestion.textContent = `${a} + ${b} = ?`;
-    mathAnswer.value = '';
-    mathAnswer.focus();
-}
-
-mathSubmit.addEventListener('click', ()=>{
-    const v = parseInt(mathAnswer.value,10);
-    if(Number.isFinite(v) && v === mathAnswerCorrect){
-        gameMessage.textContent = 'Верно! Фото открыто.';
-        unlockCurrentCard();
-        setTimeout(closeGameModal,700);
-    } else {
-        gameMessage.textContent = 'Неверно. Попробуйте ещё.';
-    }
-});
-
-function unlockCurrentCard(){
-    if(!currentLockedCard) return;
-    currentLockedCard.classList.remove('locked');
-    currentLockedCard.classList.add('unlocked');
-    // small reveal animation
-    currentLockedCard.animate([
-        { transform: 'scale(.98) rotate(0deg)', filter: 'blur(2px)' },
-        { transform: 'scale(1.02) rotate(0deg)', filter: 'blur(0px)' }
-    ], { duration: 600, easing: 'ease-out' });
-    // open viewer for the image inside
-    const img = currentLockedCard.querySelector('img');
-    if(img){
-        viewer.style.display = 'flex';
-        viewerImg.src = img.src;
-    }
-}
 
 closeViewer.onclick=()=>{
 
