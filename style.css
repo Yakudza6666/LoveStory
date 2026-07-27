@@ -1231,3 +1231,59 @@ color:white;
     .hero-photo-item.large{ width:120px; height:160px }
     .hero-photos{ display:block }
 }
+
+/* locked photo overlay */
+.photo-card.locked{
+        position:relative;
+        cursor:pointer;
+}
+.photo-card.locked::after{
+        content: '\1F512'; /* lock emoji */
+        position:absolute;
+        right:12px;
+        top:12px;
+        font-size:22px;
+        background:rgba(255,255,255,0.06);
+        color:rgba(255,255,255,0.95);
+        padding:6px 8px;
+        border-radius:10px;
+        backdrop-filter: blur(6px);
+}
+.photo-card.locked .photo{
+        filter: blur(2px) saturate(.9) contrast(.95);
+        transform: scale(.995);
+}
+
+/* Modal styles */
+.modal.hidden{ display:none }
+.modal{
+    position:fixed;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.6));
+    z-index:120;
+}
+.modal-content{
+    width:92%;
+    max-width:420px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    border-radius:14px;
+    padding:18px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.6);
+    color:#fff;
+    text-align:center;
+}
+.modal-close{ position:absolute; right:18px; top:14px; cursor:pointer; font-size:18px }
+.game-choices{ display:flex; gap:10px; justify-content:center; margin:12px 0 }
+.game-btn{ background:linear-gradient(90deg,#ff8aa3,#ff5ea3); border:0; padding:8px 12px; border-radius:10px; color:#fff; cursor:pointer }
+.big-tap{ font-size:20px; padding:18px 30px; border-radius:14px; background:linear-gradient(180deg,#ffd1e0,#ff8aa3); border:0; box-shadow:0 12px 30px rgba(255,90,140,0.16) }
+.progress{ height:8px; background:rgba(255,255,255,0.06); border-radius:6px; overflow:hidden; margin-top:12px }
+.progress .bar{ height:100%; width:0%; background:linear-gradient(90deg,#ff9ab7,#ff5ea3) }
+.game-message{ margin-top:10px; min-height:22px }
+
+@media (max-width:520px){
+    .modal-content{ max-width:340px; padding:14px }
+    .big-tap{ padding:14px 22px }
+}

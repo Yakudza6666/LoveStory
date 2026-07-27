@@ -87,31 +87,31 @@
 <div class="photo-card featured" style="--rotate:-5deg; --drift-x:0px; --drift-y:0px; --scale:1.04; --duration:10s; --ratio:5/6;">
 <img src="images/photo1.jpg" class="photo" alt="Фото нашей истории">
 </div>
-<div class="photo-card" style="--rotate:4deg; --drift-x:8px; --drift-y:-8px; --scale:1; --duration:12s; --ratio:4/5;">
+<div class="photo-card locked" style="--rotate:4deg; --drift-x:8px; --drift-y:-8px; --scale:1; --duration:12s; --ratio:4/5;">
 <img src="images/photo2.jpg" class="photo" alt="Фото нашей истории">
 </div>
-<div class="photo-card" style="--rotate:-3deg; --drift-x:-10px; --drift-y:8px; --scale:0.97; --duration:11s; --ratio:3/4;">
+<div class="photo-card locked" style="--rotate:-3deg; --drift-x:-10px; --drift-y:8px; --scale:0.97; --duration:11s; --ratio:3/4;">
 <img src="images/photo3.jpg" class="photo" alt="Фото нашей истории">
 </div>
-<div class="photo-card" style="--rotate:5deg; --drift-x:6px; --drift-y:6px; --scale:1.01; --duration:9s; --ratio:4/5;">
+<div class="photo-card locked" style="--rotate:5deg; --drift-x:6px; --drift-y:6px; --scale:1.01; --duration:9s; --ratio:4/5;">
 <img src="images/photo4.jpg" class="photo" alt="Фото нашей истории">
 </div>
-<div class="photo-card" style="--rotate:-4deg; --drift-x:10px; --drift-y:-6px; --scale:0.99; --duration:13s; --ratio:1/1;">
+<div class="photo-card locked" style="--rotate:-4deg; --drift-x:10px; --drift-y:-6px; --scale:0.99; --duration:13s; --ratio:1/1;">
 <img src="images/photo5.jpg" class="photo" alt="Фото нашей истории">
 </div>
-<div class="photo-card" style="--rotate:3deg; --drift-x:-8px; --drift-y:9px; --scale:1; --duration:10s; --ratio:4/5;">
+<div class="photo-card locked" style="--rotate:3deg; --drift-x:-8px; --drift-y:9px; --scale:1; --duration:10s; --ratio:4/5;">
 <img src="images/photo6.jpg" class="photo" alt="Фото нашей истории">
 </div>
-<div class="photo-card" style="--rotate:-2deg; --drift-x:7px; --drift-y:-7px; --scale:0.98; --duration:12s; --ratio:3/4;">
+<div class="photo-card locked" style="--rotate:-2deg; --drift-x:7px; --drift-y:-7px; --scale:0.98; --duration:12s; --ratio:3/4;">
 <img src="images/photo7.jpg" class="photo" alt="Фото нашей истории">
 </div>
-<div class="photo-card" style="--rotate:2deg; --drift-x:-6px; --drift-y:5px; --scale:0.99; --duration:11s; --ratio:4/5;">
+<div class="photo-card locked" style="--rotate:2deg; --drift-x:-6px; --drift-y:5px; --scale:0.99; --duration:11s; --ratio:4/5;">
 <img src="images/photo8.jpg" class="photo" alt="Фото нашей истории">
 </div>
-<div class="photo-card" style="--rotate:-6deg; --drift-x:5px; --drift-y:-4px; --scale:1; --duration:8s; --ratio:5/6;">
+<div class="photo-card locked" style="--rotate:-6deg; --drift-x:5px; --drift-y:-4px; --scale:1; --duration:8s; --ratio:5/6;">
 <img src="images/photo9.jpg" class="photo" alt="Фото нашей истории">
 </div>
-<div class="photo-card tall" style="--rotate:6deg; --drift-x:-12px; --drift-y:8px; --scale:1.03; --duration:15s; --ratio:3/5;">
+<div class="photo-card locked tall" style="--rotate:6deg; --drift-x:-12px; --drift-y:8px; --scale:1.03; --duration:15s; --ratio:3/5;">
 <img src="images/photo10.jpg" class="photo" alt="Фото нашей истории">
 </div>
 
@@ -306,6 +306,33 @@
 
 <img id="viewerImg">
 
+</div>
+
+<!-- Game modal for unlocking photos -->
+<div id="gameModal" class="modal hidden" aria-hidden="true">
+  <div class="modal-content">
+    <span id="gameClose" class="modal-close">✕</span>
+    <h3>Разблокировать фотографию</h3>
+    <p>Выберите мини-игру, чтобы открыть фото:</p>
+    <div class="game-choices">
+      <button id="choiceTap" class="game-btn">Тапни много</button>
+      <button id="choiceMath" class="game-btn">Реши пример</button>
+    </div>
+
+    <div id="tapGame" class="game-screen hidden">
+      <p>Нажмите быстро <strong id="tapTargetCount">25</strong> раз за <strong id="tapTimeLimit">6</strong> секунд</p>
+      <button id="tapButton" class="big-tap">ТАП</button>
+      <div class="progress"><div id="tapProgress" class="bar"></div></div>
+    </div>
+
+    <div id="mathGame" class="game-screen hidden">
+      <p id="mathQuestion">2 + 2 = ?</p>
+      <input id="mathAnswer" type="number" inputmode="numeric" autocomplete="off" />
+      <button id="mathSubmit" class="game-btn">Ответить</button>
+    </div>
+
+    <div id="gameMessage" class="game-message"></div>
+  </div>
 </div>
 
 </body>
