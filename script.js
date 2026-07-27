@@ -258,6 +258,84 @@ const viewer = document.getElementById("viewer");
 
 const viewerImg = document.getElementById("viewerImg");
 
+// ---------- Hero scattered photos ----------
+function initHeroPhotos(){
+    const container = document.getElementById('heroPhotos');
+    if(!container) return;
+    const items = Array.from(container.querySelectorAll('.hero-photo-item'));
+    const rect = document.querySelector('.hero').getBoundingClientRect();
+
+    items.forEach((img, i) => {
+        // random position inside hero rect with some padding
+        const padX = Math.max(40, rect.width * 0.08);
+        const padY = Math.max(40, rect.height * 0.08);
+        const x = Math.random() * (rect.width - padX * 2) + padX;
+        const y = Math.random() * (rect.height - padY * 2) + padY;
+        img.style.left = `${x}px`;
+        img.style.top = `${y}px`;
+
+        // small random rotation
+        const r = (Math.random() * 24 - 12).toFixed(2) + 'deg';
+        img.style.setProperty('--r', r);
+
+        // random size variants
+        if(i === items.length - 1){
+            img.classList.add('large');
+        } else if(Math.random() > 0.7){
+            img.classList.add('small');
+        }
+
+        // gentle float animation with CSS keyframes via inline style
+        const dur = 8 + Math.random() * 8;
+        img.style.animation = `heroFloat ${dur}s ease-in-out ${Math.random()*3}s infinite`;
+
+        // allow dragging on pointer devices (simple)
+        img.addEventListener('pointerdown', (e)=>{
+            if(window.innerWidth <= 520) return;
+            img.setPointerCapture(e.pointerId);
+            img.dataset.dragging = '1';
+            img.dataset.offsetX = e.clientX - img.getBoundingClientRect().left;
+            img.dataset.offsetY = e.clientY - img.getBoundingClientRect().top;
+        });
+        img.addEventListener('pointermove', (e)=>{
+            if(img.dataset.dragging !== '1') return;
+            const ox = parseFloat(img.dataset.offsetX);
+            const oy = parseFloat(img.dataset.offsetY);
+            const nx = e.clientX - rect.left - ox;
+            const ny = e.clientY - rect.top - oy;
+            img.style.left = `${Math.max(8, Math.min(rect.width - 8, nx))}px`;
+            img.style.top = `${Math.max(8, Math.min(rect.height - 8, ny))}px`;
+        });
+        img.addEventListener('pointerup', (e)=>{
+            img.releasePointerCapture(e.pointerId);
+            img.dataset.dragging = '0';
+        });
+
+    });
+
+    // recompute positions on resize
+    window.addEventListener('resize', ()=>{
+        // slight reposition to keep inside hero
+        const rect2 = document.querySelector('.hero').getBoundingClientRect();
+        items.forEach(img=>{
+            const left = parseFloat(img.style.left || 0);
+            const top = parseFloat(img.style.top || 0);
+            img.style.left = `${Math.min(rect2.width-20, left)}px`;
+            img.style.top = `${Math.min(rect2.height-20, top)}px`;
+        });
+    });
+}
+
+// float animation keyframes (insert via stylesheet)
+const style = document.createElement('style');
+style.innerHTML = `@keyframes heroFloat{ 0%{ transform: translateY(0) rotate(var(--r,0deg)) } 50%{ transform: translateY(-10px) rotate(calc(var(--r,0deg) + 2deg)) } 100%{ transform: translateY(0) rotate(var(--r,0deg)) } }`;
+document.head.appendChild(style);
+
+// init on load
+window.addEventListener('load', ()=>{
+    initHeroPhotos();
+});
+
 const closeViewer = document.getElementById("close");
 
 photos.forEach(photo=>{
