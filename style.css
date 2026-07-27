@@ -1073,109 +1073,223 @@ font-size:46px;
 
 @media(max-width:520px){
 
-.gallery{
-    gap:14px;
-    padding:8px;
+.hero{
+    padding:16px 12px;
 }
 
-.photo-card{
-    padding:8px;
-    animation:none;
-    transform:none;
+.hero-content{
+    width:min(100%, 680px);
+    margin:0 auto;
+    padding:22px 18px;
+    background:rgba(255,255,255,.08);
+    border-radius:28px;
+    box-shadow:0 18px 60px rgba(0,0,0,.22);
 }
 
-.photo-card.scattered{
-    transform:scale(calc(var(--scale, 1) + 0.02));
+.hero h2{
+    font-size:42px;
+    line-height:1.05;
+}
+
+.hero p{
+    font-size:15px;
+    line-height:1.7;
+}
+
+button{
+    width:100%;
+    padding:16px 18px;
+    font-size:16px;
+}
+
+.hero::after,
+.hero-photos{
+    display:none;
 }
 
 .heart-photo{
     position:relative;
     left:auto;
     top:auto;
-    margin:0 auto 24px;
+    margin:0 auto 22px;
     width:120px;
     height:120px;
     animation:none;
 }
 
-.hero h2{
-
-font-size:42px;
-
+.section{
+    padding:54px 16px;
 }
 
-.hero p{
-
-font-size:16px;
-
-line-height:1.8;
-
+.section h1{
+    font-size:32px;
 }
 
-button{
-
-width:100%;
-
+.section h2{
+    font-size:24px;
 }
 
-.hero-badge{
-    display:inline-block;
-    margin-top:20px;
-    padding:10px 18px;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.14);
-    border-radius:999px;
-    color:#ffcee3;
-    font-size:14px;
-    letter-spacing:1px;
-    text-transform:uppercase;
+.welcome-card h1,
+.section h1{
+    line-height:1.1;
 }
 
-.cards{
-
-grid-template-columns:1fr;
-
-}
-
-#loveTimer{
-
-grid-template-columns:1fr;
-
-}
-
-.time-box{
-
-width:100%;
-
-}
-
-.letter{
-
-padding:35px;
-
-font-size:18px;
-
-}
-
-footer h2{
-
-font-size:38px;
-
+.gallery{
+    gap:14px;
+    padding:10px 6px;
 }
 
 .photo-card{
+    width:100%;
+    padding:10px;
+    animation:none;
+    transform:none;
+    grid-column:auto;
+}
 
-padding:8px;
+.photo-card.featured{
+    grid-column:auto;
+}
 
+.photo-card.tall{
+    padding:10px;
+}
+
+.photo,
+.photo-card.featured .photo,
+.photo-card.tall .photo{
+    width:100%;
+    height:auto;
+    aspect-ratio:var(--ratio, 4/5);
+    object-fit:cover;
+}
+
+.lovey-note{
+    font-size:17px;
+    line-height:1.8;
+}
+
+.cards{
+    gap:18px;
+}
+
+.card{
+    padding:24px;
+}
+
+.card h3{
+    font-size:20px;
+}
+
+.card p{
+    font-size:15px;
+}
+
+ul li{
+    font-size:20px;
+}
+
+.letter{
+    padding:32px;
+    font-size:18px;
+}
+
+footer{
+    padding:80px 16px;
+}
+
+footer h2{
+    font-size:42px;
+}
+
+}
+
+@media(max-width:440px){
+
+.hero{
+    min-height:auto;
+    padding:18px 14px;
+}
+
+.hero-content{
+    padding:22px 16px;
+    border-radius:26px;
+}
+
+.hero h2{
+    font-size:38px;
+}
+
+.hero p{
+    font-size:14px;
+    line-height:1.65;
+}
+
+.heart-photo{
+    width:108px;
+    height:108px;
+    margin-bottom:18px;
+}
+
+button{
+    padding:14px 16px;
+    font-size:15px;
+}
+
+.section{
+    padding:50px 16px;
+}
+
+.section h1{
+    font-size:30px;
+}
+
+.section h2{
+    font-size:22px;
+}
+
+.gallery{
+    gap:12px;
+    padding:6px;
 }
 
 .photo,
 .photo-card.featured .photo{
+    height:220px;
+}
 
-height:240px;
+#loveTimer{
+    gap:16px;
+}
+
+.time-box{
+    padding:20px;
+}
+
+.time-box h2{
+    font-size:36px;
+}
+
+.letter{
+    padding:26px;
+    font-size:17px;
+}
+
+ul li{
+    font-size:18px;
+}
 
 }
 
+@media (prefers-reduced-motion: reduce){
+    .hero-photo,
+    .photo-card,
+    .time-box,
+    .card,
+    .hero-photos .hero-photo-item{
+        animation:none !important;
+        transition:none !important;
+    }
 }
 /* ===========================
    Photo Viewer

@@ -6,6 +6,8 @@
 
 window.addEventListener("load", () => {
 
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
     setTimeout(() => {
 
         document.getElementById("loader").style.display = "none";
